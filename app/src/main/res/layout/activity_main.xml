@@ -1,37 +1,89 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/constraintLayout"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <!-- Button to capture image -->
-    <Button
-        android:id="@+id/capture_button"
+    <ImageButton
+        android:id="@+id/botButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Capture Image"
-        android:layout_alignParentTop="true"
-        android:layout_centerHorizontal="true"
-        android:layout_marginTop="20dp"/>
+        android:layout_marginTop="5dp"
+        android:layout_marginEnd="5dp"
+        android:background="#00FFFFFF"
+        android:contentDescription="Bot"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/ic_bot" />
 
-    <!-- ImageView to show the image -->
-    <ImageView
-        android:id="@+id/image_view"
+    <androidx.cardview.widget.CardView
+        android:id="@+id/gpsCard"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@id/capture_button"
-        android:layout_marginLeft="10dp"
-        android:layout_marginTop="20dp"
-        android:layout_marginRight="10dp"
-        android:adjustViewBounds="true"
-        android:scaleType="fitCenter" />
+        android:layout_marginStart="20dp"
+        android:layout_marginTop="10dp"
+        android:layout_marginEnd="20dp"
+        android:clickable="true"
+        app:cardCornerRadius="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/botButton">
 
-    <!-- ProgressBar for loading -->
-    <ProgressBar
-        android:id="@+id/progress_bar"
+        <ImageView
+            android:id="@+id/imageView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:adjustViewBounds="true"
+            android:background="#1A1313"
+            android:scaleType="fitCenter"
+            app:srcCompat="@drawable/gps_image" />
+
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:text="Localize pontos de coleta!"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            android:textStyle="bold" />
+
+    </androidx.cardview.widget.CardView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:id="@+id/bottomBar"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        app:flow_verticalAlign="center"
+        app:itemIconSize="30dp"
+        app:labelVisibilityMode="unlabeled"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:menu="@menu/navigation" />
+
+
+    <com.google.android.material.floatingactionbutton.FloatingActionButton
+        android:id="@+id/camFAB"
+        style="@style/Widget.MaterialComponents.FloatingActionButton"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:visibility="gone"/>
+        android:clickable="true"
+        android:contentDescription="Cam"
+        android:focusable="true"
+        app:fabCustomSize="64dp"
+        app:fabSize="normal"
+        app:hideMotionSpec="@android:anim/accelerate_interpolator"
+        app:layout_constraintBottom_toBottomOf="@+id/bottomBar"
+        app:layout_constraintEnd_toEndOf="@+id/bottomBar"
+        app:layout_constraintStart_toStartOf="@+id/bottomBar"
+        app:layout_constraintTop_toTopOf="@+id/bottomBar"
+        app:maxImageSize="36dp"
+        app:showMotionSpec="@android:anim/accelerate_decelerate_interpolator"
+        app:srcCompat="@drawable/ic_cam"
+        app:useCompatPadding="false" />
 
-</RelativeLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>
