@@ -8,7 +8,6 @@ import android.os.Handler;
 import android.os.Looper;
 import android.provider.Settings;
 import android.util.Base64;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.Toast;
@@ -20,10 +19,6 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fatec.recycleapp.R;
 import com.fatec.recycleapp.adapter.ChatAdapter;
 import com.fatec.recycleapp.adapter.SuggestionAdapter;
-import com.fatec.recycleapp.model.MaterialCategory;
-import com.fatec.recycleapp.model.MessageConnection;
-import com.fatec.recycleapp.model.MessageType;
-import com.fatec.recycleapp.model.Suggestion;
 import com.fatec.recycleapp.util.DetectedObjects;
 
 import org.json.JSONArray;
@@ -51,7 +46,7 @@ public class ChatActivity extends AppCompatActivity {
     private EditText textInput;
     private ImageButton sendButton;
     private RecyclerView suggestionView;
-    private List<MaterialCategory> subjects;
+    private List<BotCategory> subjects;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -77,7 +72,7 @@ public class ChatActivity extends AppCompatActivity {
             if(textInput.getText().toString().isBlank())
                 return;
 
-            if(((ChatAdapter) chatView.getAdapter()).addItem(textInput.getText().toString(), MessageConnection.RECEIVER)) {
+            if(((ChatAdapter) chatView.getAdapter()).addItem(textInput.getText().toString(), BotConnection.RECEIVER)) {
                 sendAskToServer(textInput.getText().toString());
                 ((ChatAdapter) chatView.getAdapter()).cantSend();
                 textInput.setText("");
@@ -90,11 +85,11 @@ public class ChatActivity extends AppCompatActivity {
         DetectedObjects detectedObjects = intent.getParcelableExtra("detectedObjects");
 
         if(detectedObjects != null) {
-            ((ChatAdapter) chatView.getAdapter()).addItem(detectedObjects.getSource(), MessageConnection.RECEIVER);
+            ((ChatAdapter) chatView.getAdapter()).addItem(detectedObjects.getSource(), BotConnection.RECEIVER);
             ((ChatAdapter) chatView.getAdapter()).cantSend();
             sendImageToServer(detectedObjects);
         } else {
-            ((ChatAdapter) chatView.getAdapter()).addItem("Olá! Eu sou o assistente do aplicativo RecycleApp! No que posso ajudar?", MessageConnection.SENDER);
+            ((ChatAdapter) chatView.getAdapter()).addItem("Olá! Eu sou o assistente do aplicativo RecycleApp! No que posso ajudar?", BotConnection.SENDER);
             ((ChatAdapter) chatView.getAdapter()).canSend();
         }
     }
@@ -108,7 +103,7 @@ public class ChatActivity extends AppCompatActivity {
         adapter.setOnClick(new Function<String, Void>() {
             @Override
             public Void apply(String s) {
-                if(((ChatAdapter) chatView.getAdapter()).addItem(s, MessageConnection.RECEIVER)) {
+                if(((ChatAdapter) chatView.getAdapter()).addItem(s, BotConnection.RECEIVER)) {
                     sendAskToServer(s);
                     ((ChatAdapter) chatView.getAdapter()).cantSend();
                 }
@@ -134,7 +129,7 @@ public class ChatActivity extends AppCompatActivity {
         adapter.setOnClick(new Function<String, Void>() {
             @Override
             public Void apply(String s) {
-                if(((ChatAdapter) chatView.getAdapter()).addItem(s, MessageConnection.RECEIVER)) {
+                if(((ChatAdapter) chatView.getAdapter()).addItem(s, BotConnection.RECEIVER)) {
                     sendAskToServer(s);
                     ((ChatAdapter) chatView.getAdapter()).cantSend();
                 }
@@ -147,12 +142,12 @@ public class ChatActivity extends AppCompatActivity {
 
     private void sendAskToServer(String input) {
         OkHttpClient client = new OkHttpClient();
-
         JSONObject jsonBody = new JSONObject();
+
         try {
             if(!subjects.isEmpty()) {
                 StringBuilder builder = new StringBuilder();
-                for (MaterialCategory category : subjects) {
+                for (BotCategory category : subjects) {
                     builder.append(category.getName()).append(", ");
                 }
                 builder.delete(builder.length() - 2, builder.length());
@@ -175,7 +170,7 @@ public class ChatActivity extends AppCompatActivity {
         );
 
         Request request = new Request.Builder()
-                .url("http://192.168.0.11:5000/ask")
+                .url("https://a933-187-122-60-82.ngrok-free.app/ask")
                 .post(body)
                 .build();
 
@@ -184,7 +179,7 @@ public class ChatActivity extends AppCompatActivity {
             public void onFailure(Call call, IOException e) {
                 e.printStackTrace();
                 runOnUiThread(() -> {
-                    ((ChatAdapter) chatView.getAdapter()).addItem("Erro ao enviar mensagem para o servidor.", MessageConnection.SENDER);
+                    ((ChatAdapter) chatView.getAdapter()).addItem("Erro ao enviar mensagem para o servidor.", BotConnection.SENDER);
                     ((ChatAdapter) chatView.getAdapter()).canSend();
                 });
             }
@@ -201,20 +196,20 @@ public class ChatActivity extends AppCompatActivity {
                             if (!answer.isEmpty()) {
                                 processAnswer(answer.trim());
                             } else {
-                                ((ChatAdapter) chatView.getAdapter()).addItem("Nenhuma resposta do servidor.", MessageConnection.SENDER);
+                                ((ChatAdapter) chatView.getAdapter()).addItem("Nenhuma resposta do servidor.", BotConnection.SENDER);
                                 ((ChatAdapter) chatView.getAdapter()).canSend();
                             }
                         });
                     } catch (JSONException e) {
                         e.printStackTrace();
                         runOnUiThread(() -> {
-                            ((ChatAdapter) chatView.getAdapter()).addItem("Erro ao processar resposta do servidor!", MessageConnection.SENDER);
+                            ((ChatAdapter) chatView.getAdapter()).addItem("Erro ao processar resposta do servidor!", BotConnection.SENDER);
                             ((ChatAdapter) chatView.getAdapter()).canSend();
                         });
                     }
                 } else {
                     runOnUiThread(() -> {
-                        ((ChatAdapter) chatView.getAdapter()).addItem("Falha na requisição!", MessageConnection.SENDER);
+                        ((ChatAdapter) chatView.getAdapter()).addItem("Falha na requisição!", BotConnection.SENDER);
                         ((ChatAdapter) chatView.getAdapter()).canSend();
                     });
                 }
@@ -237,7 +232,7 @@ public class ChatActivity extends AppCompatActivity {
                         .build();
 
                 Request request = new Request.Builder()
-                        .url("http://192.168.0.11:5000/detect")
+                        .url("https://a933-187-122-60-82.ngrok-free.app/detect")
                         .post(requestBody)
                         .build();
 
@@ -257,7 +252,7 @@ public class ChatActivity extends AppCompatActivity {
                             if (resultBitmap != null) {
                                 detectedObjects.setResult(resultBitmap);
                             } else {
-                                ((ChatAdapter) chatView.getAdapter()).addItem("Falha ao processar a imagem!", MessageConnection.SENDER);
+                                ((ChatAdapter) chatView.getAdapter()).addItem("Falha ao processar a imagem!", BotConnection.SENDER);
                                 ((ChatAdapter) chatView.getAdapter()).canSend();
                             }
                         });
@@ -268,7 +263,7 @@ public class ChatActivity extends AppCompatActivity {
                             for (int i = 0; i < detectionArray.length(); i++) {
                                 JSONObject detection = detectionArray.optJSONObject(i);
                                 detectedObjects.addDetection(detection.optInt("category"), detection.optDouble("score"));
-                                subjects.add(MaterialCategory.values()[detection.optInt("category")]);
+                                subjects.add(BotCategory.values()[detection.optInt("category")]);
                             }
                         });
                     }
@@ -279,14 +274,14 @@ public class ChatActivity extends AppCompatActivity {
                     });
                 } else {
                     new Handler(Looper.getMainLooper()).post(() -> {
-                        ((ChatAdapter) chatView.getAdapter()).addItem("Erro no servidor!", MessageConnection.SENDER);
+                        ((ChatAdapter) chatView.getAdapter()).addItem("Erro no servidor!", BotConnection.SENDER);
                         ((ChatAdapter) chatView.getAdapter()).canSend();
                     });
                 }
             } catch (IOException | JSONException e) {
                 e.printStackTrace();
                 new Handler(Looper.getMainLooper()).post(() -> {
-                    ((ChatAdapter) chatView.getAdapter()).addItem("Erro ao enviar imagem!", MessageConnection.SENDER);
+                    ((ChatAdapter) chatView.getAdapter()).addItem("Erro ao enviar imagem!", BotConnection.SENDER);
                     ((ChatAdapter) chatView.getAdapter()).canSend();
                 });
             }
@@ -305,6 +300,6 @@ public class ChatActivity extends AppCompatActivity {
             return;
         }
 
-        ((ChatAdapter) chatView.getAdapter()).addItem(answer, MessageConnection.SENDER);
+        ((ChatAdapter) chatView.getAdapter()).addItem(answer, BotConnection.SENDER);
     }
 }

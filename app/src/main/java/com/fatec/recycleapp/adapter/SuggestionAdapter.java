@@ -10,8 +10,6 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatec.recycleapp.R;
-import com.fatec.recycleapp.model.MessageConnection;
-import com.fatec.recycleapp.model.Suggestion;
 
 import java.util.function.Function;
 
@@ -52,9 +50,9 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Vi
 
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        holder.getText().setText(Suggestion.values()[position].getAbbreviated());
+        holder.getText().setText(BotSuggestion.values()[position].getAbbreviated());
         holder.getCard().setOnClickListener(v -> {
-            onClick.apply(Suggestion.values()[position].getPhrase());
+            onClick.apply(BotSuggestion.values()[position].getPhrase());
         });
     }
 
@@ -64,6 +62,6 @@ public class SuggestionAdapter extends RecyclerView.Adapter<SuggestionAdapter.Vi
 
     @Override
     public int getItemCount() {
-        return Suggestion.values().length;
+        return BotSuggestion.values().length;
     }
 }

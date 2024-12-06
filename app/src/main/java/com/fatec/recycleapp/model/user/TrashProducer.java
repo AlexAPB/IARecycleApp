@@ -1,4 +1,6 @@
-package com.fatec.recycleapp.model;
+package com.fatec.recycleapp.model.user;
+
+import com.fatec.recycleapp.model.user.attributes.UserType;
 
 public class TrashProducer extends User {
     private String cpf;

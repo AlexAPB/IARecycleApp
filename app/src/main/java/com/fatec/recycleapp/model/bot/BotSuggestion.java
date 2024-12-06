@@ -1,6 +1,6 @@
-package com.fatec.recycleapp.model;
+package com.fatec.recycleapp.model.bot;
 
-public enum Suggestion {
+public enum BotSuggestion {
     RECYCLE(1, "Como reciclar", "Como reciclar este material?"),
     CHANGE(2, "Outro material", "Quero falar sobre outro tipo de material."),
     DISPOSAL(3, "Descarte correto", "Onde descartar este item de forma correta?"),
@@ -20,7 +20,7 @@ public enum Suggestion {
     private final String abbreviated;
     private final String phrase;
 
-    Suggestion(Integer id, String abbreviated, String phrase) {
+    BotSuggestion(Integer id, String abbreviated, String phrase) {
         this.id = id;
         this.abbreviated = abbreviated;
         this.phrase = phrase;

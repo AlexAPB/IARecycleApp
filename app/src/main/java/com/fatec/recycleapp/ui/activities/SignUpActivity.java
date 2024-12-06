@@ -25,7 +25,7 @@ public class SignUpActivity extends AppCompatActivity {
             @Override
             public void onPageSelected(int position) {
                 super.onPageSelected(position);
-                // Aqui você pode manipular a navegação (mostrar botões específicos, etc.)
+
             }
         });
     }

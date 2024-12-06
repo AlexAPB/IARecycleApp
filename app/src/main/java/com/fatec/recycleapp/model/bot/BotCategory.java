@@ -1,6 +1,6 @@
-package com.fatec.recycleapp.model;
+package com.fatec.recycleapp.model.bot;
 
-public enum MaterialCategory {
+public enum BotCategory {
     ALUMINIUM_FOIL(1, "Folha de alumínio"),
     BATTERY(2, "Bateria"),
     ALUMINIUM_BLISTER_PACK(3, "Blister de alumínio"),
@@ -65,7 +65,7 @@ public enum MaterialCategory {
     private final int id;
     private final String name;
 
-    MaterialCategory(int id, String name) {
+    BotCategory(int id, String name) {
         this.id = id;
         this.name = name;
     }

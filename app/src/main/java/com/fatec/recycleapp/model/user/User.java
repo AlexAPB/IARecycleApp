@@ -1,4 +1,9 @@
-package com.fatec.recycleapp.model;
+package com.fatec.recycleapp.model.user;
+
+import com.fatec.recycleapp.model.user.attributes.Address;
+import com.fatec.recycleapp.model.user.attributes.UserType;
+
+import java.util.List;
 
 public abstract class User {
     private Integer id;
@@ -6,6 +11,7 @@ public abstract class User {
     private String email;
     private String password;
     private String phone;
+    private List<Address> addresses;
     private UserType userType;
 
     public User() {
