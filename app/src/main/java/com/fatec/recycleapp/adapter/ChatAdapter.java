@@ -7,7 +7,6 @@ import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.Color;
 import android.graphics.Typeface;
-import android.util.DisplayMetrics;
 import android.util.TypedValue;
 import android.view.Gravity;
 import android.view.LayoutInflater;
@@ -26,10 +25,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatec.recycleapp.R;
-import com.fatec.recycleapp.model.MaterialCategory;
-import com.fatec.recycleapp.model.Message;
-import com.fatec.recycleapp.model.MessageConnection;
-import com.fatec.recycleapp.model.MessageType;
+import com.fatec.recycleapp.model.bot.BotCategory;
+import com.fatec.recycleapp.model.bot.BotConnection;
+import com.fatec.recycleapp.model.bot.BotMessage;
+import com.fatec.recycleapp.model.bot.BotMessageType;
 import com.fatec.recycleapp.util.ButtonUtil;
 import com.fatec.recycleapp.util.DetectedObjects;
 import com.fatec.recycleapp.util.ImageUtil;
@@ -46,7 +45,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     private final Context context;
     private Function<Void, Void> onAdd;
     private Function<String, Void> onClick;
-    private final List<Message> messages;
+    private final List<BotMessage> botMessages;
     private boolean canSend = true;
 
     public static class ViewHolder extends RecyclerView.ViewHolder {
@@ -63,7 +62,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
             return cardView;
         }
 
-        public void setConnection(MessageConnection connection) {
+        public void setConnection(BotConnection connection) {
             FrameLayout.LayoutParams params = (FrameLayout.LayoutParams) cardView.getLayoutParams();
 
             int pad = (int) TypedValue.applyDimension(
@@ -72,7 +71,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                     chatLayout.getContext().getResources().getDisplayMetrics()
             );
 
-            if(connection == MessageConnection.SENDER) {
+            if(connection == BotConnection.SENDER) {
                 params.gravity = Gravity.LEFT | Gravity.START;
                 chatLayout.setPadding(0, 0, pad, 0);
             } else {
@@ -84,7 +83,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     public ChatAdapter(Context context) {
         this.context = context;
-        messages = new ArrayList<>();
+        botMessages = new ArrayList<>();
     }
 
     @NonNull
@@ -98,12 +97,12 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
     @SuppressLint("DefaultLocale")
     @Override
     public void onBindViewHolder(@NonNull ViewHolder holder, int position) {
-        Message message = messages.get(position);
+        BotMessage botMessage = botMessages.get(position);
 
-        switch (message.getType()) {
+        switch (botMessage.getType()) {
             case TEXT:
                 TextView textView = new TextView(context);
-                textView.setText((String) message.getMsg());
+                textView.setText((String) botMessage.getMsg());
                 textView.setTextSize(16);
                 textView.setTextColor(Color.BLACK);
                 holder.getCardView().addView(textView);
@@ -111,7 +110,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                 break;
             case IMAGE:
                 ShapeableImageView imageView = new ShapeableImageView(context);
-                imageView.setImageBitmap((Bitmap) message.getMsg());
+                imageView.setImageBitmap((Bitmap) botMessage.getMsg());
                 imageView.setAdjustViewBounds(true);
                 imageView.setShapeAppearanceModel(imageView.getShapeAppearanceModel()
                         .toBuilder()
@@ -123,7 +122,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                 holder.getCardView().addView(imageView);
                 break;
             case DETECTION:
-                DetectedObjects detectedObjects = (DetectedObjects) message.getMsg();
+                DetectedObjects detectedObjects = (DetectedObjects) botMessage.getMsg();
 
                 LinearLayout linearLayout = new LinearLayout(context);
                 linearLayout.setOrientation(LinearLayout.VERTICAL);
@@ -188,7 +187,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                 ArrayAdapter<String> adapter = new ArrayAdapter<>(
                         context,
                         android.R.layout.simple_spinner_item,
-                        Arrays.stream(MaterialCategory.values()).map(MaterialCategory::getName).collect(Collectors.toList())
+                        Arrays.stream(BotCategory.values()).map(BotCategory::getName).collect(Collectors.toList())
                 );
                 adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
                 spinner.setAdapter(adapter);
@@ -216,51 +215,51 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
                 break;
         }
 
-        holder.setConnection(message.getConnection());
+        holder.setConnection(botMessage.getConnection());
     }
 
-    public boolean addItem(String message, MessageConnection connection) {
-        if(!canSend && connection == MessageConnection.RECEIVER) {
+    public boolean addItem(String message, BotConnection connection) {
+        if(!canSend && connection == BotConnection.RECEIVER) {
             Toast.makeText(context, "Aguarde para enviar outra mensagem!", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        Message msg = new Message(message, MessageType.TEXT, connection);
-        messages.add(msg);
+        BotMessage msg = new BotMessage(message, BotMessageType.TEXT, connection);
+        botMessages.add(msg);
 
-        notifyItemInserted(messages.size() - 1);
+        notifyItemInserted(botMessages.size() - 1);
         onAdd.apply(null);
         return true;
     }
 
-    public boolean addItem(Bitmap message, MessageConnection connection) {
-        if(!canSend && connection == MessageConnection.RECEIVER) {
+    public boolean addItem(Bitmap message, BotConnection connection) {
+        if(!canSend && connection == BotConnection.RECEIVER) {
             Toast.makeText(context, "Aguarde para enviar outra mensagem!", Toast.LENGTH_SHORT).show();
             return false;
         }
 
-        Message msg = new Message(message, MessageType.IMAGE, connection);
-        messages.add(msg);
+        BotMessage msg = new BotMessage(message, BotMessageType.IMAGE, connection);
+        botMessages.add(msg);
 
-        notifyItemInserted(messages.size() - 1);
+        notifyItemInserted(botMessages.size() - 1);
         onAdd.apply(null);
         return true;
     }
 
     public boolean addItem(DetectedObjects message) {
-        Message msg = new Message(message, MessageType.DETECTION, MessageConnection.SENDER);
-        messages.add(msg);
+        BotMessage msg = new BotMessage(message, BotMessageType.DETECTION, BotConnection.SENDER);
+        botMessages.add(msg);
 
-        notifyItemInserted(messages.size() - 1);
+        notifyItemInserted(botMessages.size() - 1);
         onAdd.apply(null);
         return true;
     }
 
     public boolean chooseMaterial() {
-        Message msg = new Message(null, MessageType.CHOOSE_MATERIAL, MessageConnection.SENDER);
-        messages.add(msg);
+        BotMessage msg = new BotMessage(null, BotMessageType.CHOOSE_MATERIAL, BotConnection.SENDER);
+        botMessages.add(msg);
 
-        notifyItemInserted(messages.size() - 1);
+        notifyItemInserted(botMessages.size() - 1);
         onAdd.apply(null);
         return true;
     }
@@ -275,7 +274,7 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return messages.size();
+        return botMessages.size();
     }
 
     public void setOnClick(Function<String, Void> onClick) {
@@ -286,8 +285,8 @@ public class ChatAdapter extends RecyclerView.Adapter<ChatAdapter.ViewHolder> {
         this.onAdd = onAdd;
     }
 
-    public List<Message> getMessages() {
-        return messages;
+    public List<BotMessage> getMessages() {
+        return botMessages;
     }
 
     @Override

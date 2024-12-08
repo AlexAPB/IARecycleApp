@@ -6,16 +6,15 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
-import com.fatec.recycleapp.model.MaterialCategory;
+import com.fatec.recycleapp.model.bot.BotCategory;
 
-import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
 public class DetectedObjects implements Parcelable {
     private Bitmap source;
     private Bitmap result;
-    private final List<MaterialCategory> categories;
+    private final List<BotCategory> categories;
     private final List<Double> scores;
 
     public DetectedObjects() {
@@ -39,7 +38,7 @@ public class DetectedObjects implements Parcelable {
     }
 
     public void addDetection(int category, double score) {
-        categories.add(MaterialCategory.values()[category]);
+        categories.add(BotCategory.values()[category]);
         scores.add(score);
     }
 
@@ -51,7 +50,7 @@ public class DetectedObjects implements Parcelable {
         return result;
     }
 
-    public List<MaterialCategory> getCategories() {
+    public List<BotCategory> getCategories() {
         return categories;
     }
 
