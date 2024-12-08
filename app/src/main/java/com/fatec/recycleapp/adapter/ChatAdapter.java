@@ -25,6 +25,10 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatec.recycleapp.R;
+import com.fatec.recycleapp.model.bot.BotCategory;
+import com.fatec.recycleapp.model.bot.BotConnection;
+import com.fatec.recycleapp.model.bot.BotMessage;
+import com.fatec.recycleapp.model.bot.BotMessageType;
 import com.fatec.recycleapp.util.ButtonUtil;
 import com.fatec.recycleapp.util.DetectedObjects;
 import com.fatec.recycleapp.util.ImageUtil;

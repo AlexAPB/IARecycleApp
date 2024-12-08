@@ -11,6 +11,7 @@ activity = "1.9.3"
 constraintlayout = "2.2.0"
 okhttp = "4.10.0"
 places = "4.1.0"
+placesVersion = "3.3.0"
 playServicesLocation = "21.3.0"
 playServicesMapsVersion = "18.2.0"
 retrofit = "2.9.0"
@@ -38,7 +39,6 @@ activity = { group = "androidx.activity", name = "activity", version.ref = "acti
 constraintlayout = { group = "androidx.constraintlayout", name = "constraintlayout", version.ref = "constraintlayout" }
 okhttp = { module = "com.squareup.okhttp3:okhttp", version.ref = "okhttp" }
 places = { module = "com.google.android.libraries.places:places", version.ref = "places" }
-places-v110 = { module = "com.google.android.libraries.places:places", version.ref = "googlePlaces" }
 play-services-location = { module = "com.google.android.gms:play-services-location", version.ref = "playServicesLocation" }
 play-services-maps-v1820 = { module = "com.google.android.gms:play-services-maps", version.ref = "playServicesMapsVersion" }
 retrofit = { module = "com.squareup.retrofit2:retrofit", version.ref = "retrofit" }

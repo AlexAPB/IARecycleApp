@@ -19,6 +19,8 @@ import androidx.recyclerview.widget.RecyclerView;
 import com.fatec.recycleapp.R;
 import com.fatec.recycleapp.adapter.ChatAdapter;
 import com.fatec.recycleapp.adapter.SuggestionAdapter;
+import com.fatec.recycleapp.model.bot.BotCategory;
+import com.fatec.recycleapp.model.bot.BotConnection;
 import com.fatec.recycleapp.util.DetectedObjects;
 
 import org.json.JSONArray;

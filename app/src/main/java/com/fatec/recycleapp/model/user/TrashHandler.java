@@ -1,16 +1,23 @@
 package com.fatec.recycleapp.model.user;
 
+import com.fatec.recycleapp.model.collect.Collect;
+import com.fatec.recycleapp.model.penality.Penality;
+import com.fatec.recycleapp.model.user.attributes.Address;
 import com.fatec.recycleapp.model.user.attributes.UserType;
+
+import java.util.List;
 
 public class TrashHandler extends User {
     private String cpf;
+    private String pix;
 
     public TrashHandler() {
     }
 
-    public TrashHandler(Integer id, String name, String email, String password, String phone, UserType userType, String cpf) {
-        super(id, name, email, password, phone, userType);
+    public TrashHandler(Integer id, String name, String email, String password, String phone, UserType userType, Double rate, List<Address> addresses, List<Collect> collects, List<Penality> penalities, String cpf, String pix) {
+        super(id, name, email, password, phone, userType, rate, addresses, collects, penalities);
         this.cpf = cpf;
+        this.pix = pix;
     }
 
     public TrashHandler(TrashHandler user) {
@@ -24,5 +31,13 @@ public class TrashHandler extends User {
 
     public void setCpf(String cpf) {
         this.cpf = cpf;
+    }
+
+    public String getPix() {
+        return pix;
+    }
+
+    public void setPix(String pix) {
+        this.pix = pix;
     }
 }

@@ -6,6 +6,8 @@ import android.os.Parcelable;
 
 import androidx.annotation.NonNull;
 
+import com.fatec.recycleapp.model.bot.BotCategory;
+
 import java.util.ArrayList;
 import java.util.List;
 

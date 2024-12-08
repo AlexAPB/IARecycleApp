@@ -1,18 +1,24 @@
 package com.fatec.recycleapp.model.user;
 
+import com.fatec.recycleapp.model.collect.Collect;
+import com.fatec.recycleapp.model.penality.Penality;
+import com.fatec.recycleapp.model.user.attributes.Address;
 import com.fatec.recycleapp.model.user.attributes.UserType;
+
+import java.util.List;
 
 public class Enterprise extends User {
     private String legalName; // Razão social
     private String brandName; // Nome fantasia
     private String cnpj;
+    private List<User> handlers;
 
     public Enterprise() {
 
     }
 
-    public Enterprise(Integer id, String name, String email, String password, String phone, UserType userType, String legalName, String brandName, String cnpj) {
-        super(id, name, email, password, phone, userType);
+    public Enterprise(Integer id, String name, String email, String password, String phone, UserType userType, Double rate, List<Address> addresses, List<Collect> collects, List<Penality> penalities, String legalName, String brandName, String cnpj) {
+        super(id, name, email, password, phone, userType, rate, addresses, collects, penalities);
         this.legalName = legalName;
         this.brandName = brandName;
         this.cnpj = cnpj;
@@ -23,6 +29,7 @@ public class Enterprise extends User {
         this.legalName = user.legalName;
         this.brandName = user.brandName;
         this.cnpj = user.cnpj;
+        this.handlers = user.handlers;
     }
 
     public String getLegalName() {
@@ -47,5 +54,13 @@ public class Enterprise extends User {
 
     public void setCnpj(String cnpj) {
         this.cnpj = cnpj;
+    }
+
+    public void setHandlers(List<User> handlers) {
+        this.handlers = handlers;
+    }
+
+    public List<User> getHandlers() {
+        return handlers;
     }
 }

@@ -10,6 +10,7 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.fatec.recycleapp.R;
+import com.fatec.recycleapp.model.bot.BotSuggestion;
 
 import java.util.function.Function;
 
