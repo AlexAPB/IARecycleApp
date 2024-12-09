@@ -11,6 +11,7 @@ public class Address {
     private String state;
     private String zipCode;
     private String country;
+    private String reference;
     private Double latitude;
     private Double longitude;
     private AddressType type;
@@ -48,6 +49,14 @@ public class Address {
 
     public void setComplement(String complement) {
         this.complement = complement;
+    }
+
+    public String getReference() {
+        return reference;
+    }
+
+    public void setReference(String reference) {
+        this.reference = reference;
     }
 
     public String getNeighborhood() {

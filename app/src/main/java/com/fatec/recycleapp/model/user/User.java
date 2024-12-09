@@ -5,11 +5,13 @@ import com.fatec.recycleapp.model.penality.Penality;
 import com.fatec.recycleapp.model.user.attributes.Address;
 import com.fatec.recycleapp.model.user.attributes.UserType;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public abstract class User {
     private Integer id;
     private String name;
+    private String lastName;
     private String email;
     private String password;
     private String phone;
@@ -20,10 +22,12 @@ public abstract class User {
     private List<Penality> penalities;
 
     public User() {
-
+        addresses = new ArrayList<>();
+        collects = new ArrayList<>();
+        penalities = new ArrayList<>();
     }
 
-    public User(Integer id, String name, String email, String password, String phone, UserType userType, Double rate, List<Address> addresses, List<Collect> collects, List<Penality> penalities) {
+    public User(Integer id, String name, String lastName, String email, String password, String phone, UserType userType, Double rate, List<Address> addresses, List<Collect> collects, List<Penality> penalities) {
         this.id = id;
         this.name = name;
         this.email = email;
@@ -39,6 +43,7 @@ public abstract class User {
     public User(User user) {
         this.id = user.id;
         this.name = user.name;
+        this.lastName = user.lastName;
         this.email = user.email;
         this.password = user.password;
         this.phone = user.phone;
@@ -62,6 +67,14 @@ public abstract class User {
 
     public void setName(String name) {
         this.name = name;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
     public String getEmail() {
@@ -106,6 +119,10 @@ public abstract class User {
 
     public void setAddresses(List<Address> addresses) {
         this.addresses = addresses;
+    }
+
+    public void add(Address address) {
+        addresses.add(address);
     }
 
     public List<Address> getAddresses() {

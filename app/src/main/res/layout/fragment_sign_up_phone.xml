@@ -7,7 +7,7 @@
     tools:context=".ui.fragments.sign.SignUpAddress">
 
     <TextView
-        android:id="@+id/fsuaTitle"
+        android:id="@+id/aabba"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginTop="50dp"
@@ -21,7 +21,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <LinearLayout
-        android:id="@+id/fsuaTextContainer"
+        android:id="@+id/fsuaTextContbbainer"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="10dp"
@@ -30,7 +30,7 @@
         android:orientation="vertical"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/fsuaTitle">
+        app:layout_constraintTop_toBottomOf="@+id/aabba">
 
         <LinearLayout
             android:layout_width="match_parent"
@@ -40,12 +40,10 @@
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
-                android:layout_marginEnd="5dp"
-                android:layout_marginBottom="20dp"
-                android:layout_weight="1">
+                android:layout_marginBottom="20dp">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fsuaStreet"
+                    android:id="@+id/fsuaStreetbb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Rua"
@@ -55,16 +53,14 @@
 
             <com.google.android.material.textfield.TextInputLayout
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_marginStart="5dp"
-                android:layout_weight="1.5">
+                android:layout_height="match_parent">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fsuaNeighborhood"
+                    android:id="@+id/fsuaNeighborhoodbb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:hint="Bairro"
-                    android:singleLine="true" />
+                    android:singleLine="true"
+                    android:hint="hint" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
@@ -80,11 +76,10 @@
                 android:layout_weight="3">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fsuaNumber"
+                    android:id="@+id/fsuaNumberbb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:hint="Nº"
-                    android:inputType="number|numberSigned"
                     android:maxLength="100"
                     android:singleLine="true" />
             </com.google.android.material.textfield.TextInputLayout>
@@ -96,7 +91,7 @@
                 android:layout_weight="1">
 
                 <com.google.android.material.textfield.TextInputEditText
-                    android:id="@+id/fsuaComplement"
+                    android:id="@+id/fsuaComplementbb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:singleLine="true"
@@ -110,7 +105,7 @@
             android:layout_marginBottom="20dp">
 
             <com.google.android.material.textfield.TextInputEditText
-                android:id="@+id/fsuaReference"
+                android:id="@+id/fsuaReferencebb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:singleLine="true"
@@ -123,7 +118,7 @@
             android:layout_marginBottom="20dp">
 
             <com.vicmikhailau.maskededittext.MaskedEditText
-                android:id="@+id/fsuaCep"
+                android:id="@+id/fsuaCepbb"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:hint="CEP"
@@ -138,54 +133,48 @@
             android:orientation="horizontal">
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginEnd="10dp"
                 android:layout_weight="1">
 
-                <AutoCompleteTextView
-                    android:id="@+id/fsuaState"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fsuaStatebb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="Estado"
-                    android:paddingStart="15dp" />
-
+                    android:singleLine="true"
+                    android:hint="Estado" />
             </com.google.android.material.textfield.TextInputLayout>
 
             <com.google.android.material.textfield.TextInputLayout
-                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
+                android:layout_height="match_parent"
                 android:layout_marginStart="10dp"
                 android:layout_weight="1">
 
-                <AutoCompleteTextView
-                    android:id="@+id/fsuaCity"
+                <com.google.android.material.textfield.TextInputEditText
+                    android:id="@+id/fsuaCitybb"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:hint="Cidade"
-                    android:paddingStart="15dp" />
-
+                    android:singleLine="true"
+                    android:hint="Cidade" />
             </com.google.android.material.textfield.TextInputLayout>
         </LinearLayout>
 
     </LinearLayout>
 
     <TextView
-        android:id="@+id/fsuaErrorText"
+        android:id="@+id/fsuaErrorTextbb"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="10dp"
         android:textColor="#FF0000"
-        app:layout_constraintBottom_toTopOf="@+id/fsua_ButtonContainer"
+        app:layout_constraintBottom_toTopOf="@+id/fsua_ButtonContainerbb"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent" />
 
     <LinearLayout
-        android:id="@+id/fsua_ButtonContainer"
+        android:id="@+id/fsua_ButtonContainerbb"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginHorizontal="5dp"
@@ -196,7 +185,7 @@
         app:layout_constraintStart_toStartOf="parent">
 
         <Button
-            android:id="@+id/fsuaBack"
+            android:id="@+id/fsuaBackbb"
             style="@style/Widget.Material3.Button.OutlinedButton"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -214,7 +203,7 @@
         </FrameLayout>
 
         <Button
-            android:id="@+id/fsuaNext"
+            android:id="@+id/fsuaNextbb"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_gravity="bottom"

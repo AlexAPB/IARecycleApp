@@ -14,4 +14,9 @@
     <string name="login_failed">"Login failed"</string>
     <string name="title_activity_home">HomeActivity</string>
     <string name="title_activity_sign_up">SignUpActivity</string>
+    <string-array name="gender_options">
+        <item>Selecione o sexo</item>
+        <item>Feminino</item>
+        <item>Masculino</item>
+    </string-array>
 </resources>

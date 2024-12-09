@@ -14,4 +14,14 @@ public enum UserType {
     public Integer getId() {
         return id;
     }
+
+    public static UserType fromId(Integer id) {
+        for (UserType type : values()) {
+            if (type.getId().equals(id)) {
+                return type;
+            }
+        }
+
+        throw new IllegalArgumentException("Invalid id: " + id);
+    }
 }

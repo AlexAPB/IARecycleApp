@@ -172,7 +172,7 @@ public class ChatActivity extends AppCompatActivity {
         );
 
         Request request = new Request.Builder()
-                .url("https://a933-187-122-60-82.ngrok-free.app/ask")
+                .url("https://930f-187-122-60-82.ngrok-free.app/ask")
                 .post(body)
                 .build();
 
@@ -223,7 +223,7 @@ public class ChatActivity extends AppCompatActivity {
         new Thread(() -> {
             try {
                 ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
-                detectedObjects.getSource().compress(Bitmap.CompressFormat.JPEG, 90, byteArrayOutputStream);
+                detectedObjects.getSource().compress(Bitmap.CompressFormat.JPEG, 100, byteArrayOutputStream);
                 byte[] byteArray = byteArrayOutputStream.toByteArray();
 
                 OkHttpClient client = new OkHttpClient();
@@ -234,7 +234,7 @@ public class ChatActivity extends AppCompatActivity {
                         .build();
 
                 Request request = new Request.Builder()
-                        .url("https://a933-187-122-60-82.ngrok-free.app/detect")
+                        .url("https://930f-187-122-60-82.ngrok-free.app/detect")
                         .post(requestBody)
                         .build();
 

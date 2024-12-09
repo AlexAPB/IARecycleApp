@@ -11,14 +11,15 @@ public class Enterprise extends User {
     private String legalName; // Razão social
     private String brandName; // Nome fantasia
     private String cnpj;
+    private String description;
     private List<User> handlers;
 
     public Enterprise() {
 
     }
 
-    public Enterprise(Integer id, String name, String email, String password, String phone, UserType userType, Double rate, List<Address> addresses, List<Collect> collects, List<Penality> penalities, String legalName, String brandName, String cnpj) {
-        super(id, name, email, password, phone, userType, rate, addresses, collects, penalities);
+    public Enterprise(Integer id, String name, String lastName, String email, String password, String phone, UserType userType, Double rate, List<Address> addresses, List<Collect> collects, List<Penality> penalities, String legalName, String brandName, String cnpj) {
+        super(id, name, lastName, email, password, phone, userType, rate, addresses, collects, penalities);
         this.legalName = legalName;
         this.brandName = brandName;
         this.cnpj = cnpj;
@@ -62,5 +63,13 @@ public class Enterprise extends User {
 
     public List<User> getHandlers() {
         return handlers;
+    }
+
+    public void setDescription(String description) {
+        this.description = description;
+    }
+
+    public String getDescription() {
+        return description;
     }
 }

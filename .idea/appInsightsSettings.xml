@@ -28,10 +28,10 @@
             <InsightsFilterSettings>
               <option name="connection">
                 <ConnectionSetting>
-                  <option name="appId" value="PLACEHOLDER" />
-                  <option name="mobileSdkAppId" value="" />
-                  <option name="projectId" value="" />
-                  <option name="projectNumber" value="" />
+                  <option name="appId" value="com.fatec.recycleapp" />
+                  <option name="mobileSdkAppId" value="1:1028353142097:android:6f4f329612e18981267770" />
+                  <option name="projectId" value="recycleapp-e451b" />
+                  <option name="projectNumber" value="1028353142097" />
                 </ConnectionSetting>
               </option>
               <option name="signal" value="SIGNAL_UNSPECIFIED" />
